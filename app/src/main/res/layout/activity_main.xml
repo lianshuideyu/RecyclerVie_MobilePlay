@@ -55,7 +55,7 @@
             />
         <RadioButton
             android:id="@+id/rb_recyclerview"
-            android:drawableTop="@drawable/net_video_selector"
+            android:drawableTop="@drawable/net_video_selector2"
             android:text="RecyclerView"
 
             style="@style/bottom_button"
