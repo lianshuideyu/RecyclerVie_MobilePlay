@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#44ff0000"
+    android:orientation="vertical"
+    android:layout_marginBottom="2dp"
+    android:layout_marginRight="2dp">
+
+    <TextView
+        android:textSize="25sp"
+        android:id="@+id/id_num"
+        android:gravity="center"
+        android:text="1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</FrameLayout>
