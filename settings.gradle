@@ -1,1 +1,1 @@
-include ':app', ':PhotoView_library'
+include ':app', ':PhotoView_library', ':仿ViewPager'

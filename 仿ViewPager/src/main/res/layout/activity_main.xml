@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <include layout="@layout/ll_title"/>
+
+    <com.atguigu.viewpager.MyViewPager
+        android:layout_weight="1"
+        android:id="@+id/my_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </com.atguigu.viewpager.MyViewPager>
+
+
+    <RadioGroup
+        android:id="@+id/rg_bottom"
+        android:background="#F2F2F2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <RadioButton
+            android:id="@+id/rb_local_video"
+            android:drawableTop="@drawable/local_video_selector"
+            android:text="本地视频"
+            style="@style/bottom_button"/>
+
+        <RadioButton
+            android:id="@+id/rb_local_audio"
+            android:drawableTop="@drawable/local_audio_selector"
+            android:text="本地音乐"
+
+            style="@style/bottom_button"
+            />
+        <RadioButton
+            android:id="@+id/rb_net_audio"
+            android:drawableTop="@drawable/net_audio_selector"
+            android:text="网络歌曲"
+
+            style="@style/bottom_button"
+            />
+        <RadioButton
+            android:id="@+id/rb_net_video"
+            android:drawableTop="@drawable/net_video_selector"
+            android:text="网络视频"
+
+            style="@style/bottom_button"
+            />
+        <RadioButton
+            android:id="@+id/rb_recyclerview"
+            android:drawableTop="@drawable/net_video_selector2"
+            android:text="RecyclerView"
+
+            style="@style/bottom_button"
+            />
+    </RadioGroup>
+</LinearLayout>
