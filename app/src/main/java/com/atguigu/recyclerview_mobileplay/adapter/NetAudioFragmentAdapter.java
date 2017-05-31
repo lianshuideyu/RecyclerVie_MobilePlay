@@ -111,15 +111,15 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
                 break;
             case TYPE_TEXT :
                 baseViewHolder = new TextHolder(LayoutInflater.from(mContext)
-                        .inflate(R.layout.item_home, parent, false));
+                        .inflate(R.layout.all_text_item, parent, false));
                 break;
             case TYPE_GIF :
                 baseViewHolder = new GifHolder(LayoutInflater.from(mContext)
-                        .inflate(R.layout.item_home, parent, false));
+                        .inflate(R.layout.all_gif_item, parent, false));
                 break;
             case TYPE_AD :
                 baseViewHolder = new ADHolder(LayoutInflater.from(mContext)
-                        .inflate(R.layout.item_home, parent, false));
+                        .inflate(R.layout.all_ad_item, parent, false));
                 break;
 
         }
@@ -151,7 +151,7 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
             case TYPE_TEXT :
                 TextHolder textHolder = (TextHolder) holder;
 
-                textHolder.tv.setText("text");
+                textHolder.setData(datas.get(position));
                 break;
             case TYPE_GIF :
                 GifHolder gifHolder = (GifHolder) holder;
@@ -310,13 +310,20 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
     }
 
     class TextHolder extends BaseViewHolder{
-        TextView tv;
+        TextView tvContext;
+
         public TextHolder(View itemView) {
             super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.id_num);
+            //中间公共部分 -所有的都有
+            tvContext = (TextView) itemView.findViewById(R.id.tv_context);
         }
 
+        public void setData(NetAudioBean.ListBean mediaItem) {
+            super.setData(mediaItem);
 
+            //设置文本-所有的都有
+            tvContext.setText(mediaItem.getText() + "_" + mediaItem.getType());
+        }
     }
 
     class GifHolder extends BaseViewHolder{
