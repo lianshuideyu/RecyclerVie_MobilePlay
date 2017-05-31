@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -122,6 +123,7 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
             case TYPE_AD :
                 baseViewHolder = new ADHolder(LayoutInflater.from(mContext)
                         .inflate(R.layout.all_ad_item, parent, false));
+
                 break;
 
         }
@@ -163,7 +165,7 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
             case TYPE_AD :
                 ADHolder adHolder = (ADHolder) holder;
 
-                adHolder.tv.setText("AD");
+                adHolder.setData();
                 break;
         }
 
@@ -332,6 +334,7 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
         TextView tvContext;
         ImageView ivImageGif;
         private ImageOptions imageOptions;
+
         public GifHolder(View convertView) {
             super(convertView);
 
@@ -366,10 +369,21 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
     }
 
     class ADHolder extends BaseViewHolder{
-        TextView tv;
+        TextView tvContext;
+        ImageView ivImageIcon;
+        Button btnInstall;
+
         public ADHolder(View itemView) {
             super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.id_num);
+
+            //中间公共部分 -所有的都有
+            tvContext = (TextView) itemView.findViewById(R.id.tv_context);
+            btnInstall = (Button) itemView.findViewById(R.id.btn_install);
+            ivImageIcon = (ImageView) itemView.findViewById(R.id.iv_image_icon);
+        }
+
+        public void setData() {
+            tvContext.setText("网络推广");
         }
     }
 }
