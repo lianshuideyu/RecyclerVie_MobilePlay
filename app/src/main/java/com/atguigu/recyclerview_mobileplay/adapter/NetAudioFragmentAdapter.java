@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.atguigu.recyclerview_mobileplay.R;
 import com.atguigu.recyclerview_mobileplay.activity.ShowImageAndGifActivity;
@@ -183,7 +182,15 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
                 gifHolder.ivImageGif.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(mContext, "点击gif", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, "点击gif", Toast.LENGTH_SHORT).show();
+                        NetAudioBean.ListBean listBean = datas.get(position);
+                        if(listBean != null) {
+                            //3.传递视频列表
+                            Intent intent = new Intent(mContext, ShowImageAndGifActivity.class);
+                            String url = listBean.getGif().getImages().get(0);
+                            intent.putExtra("url",url);
+                            mContext.startActivity(intent);
+                        }
                     }
                 });
                 break;
