@@ -1,8 +1,8 @@
 package com.atguigu.recyclerview_mobileplay;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.RadioGroup;
 
 import com.atguigu.recyclerview_mobileplay.basefragment.BaseFragment;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         initData();
 
         rg_bottom.setOnCheckedChangeListener(this);
-        rg_bottom.check(R.id.rb_recyclerview);//初进页面默认勾选的项目
+        rg_bottom.check(R.id.rb_local_video);//初进页面默认勾选的项目
     }
 
     private void initData() {
@@ -71,18 +71,19 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     }
 
     private void addFragment(BaseFragment currentFragment) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (tempFragment != currentFragment) {
-            if(!currentFragment.isAdded()) {
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            if (!currentFragment.isAdded()) {
                 //当没有添加过先隐藏之前的然后添加当前的
-                if(tempFragment != null) {
+                if (tempFragment != null) {
                     ft.hide(tempFragment);
                 }
 
-                ft.add(R.id.fl_pageFragment,currentFragment);
-            }else {
+                ft.add(R.id.fl_pageFragment, currentFragment);
+            } else {
                 //如果添加过就先隐藏之前的缓存然后显示现在的
-                if(tempFragment != null) {
+                if (tempFragment != null) {
                     ft.hide(tempFragment);
                 }
                 ft.show(currentFragment);
