@@ -14,6 +14,7 @@ import com.atguigu.recyclerview_mobileplay.R;
 import com.atguigu.recyclerview_mobileplay.domain.NetAudioBean;
 import com.atguigu.recyclerview_mobileplay.util.Utils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.xutils.x;
 
@@ -106,7 +107,7 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
                 break;
             case TYPE_IMAGE :
                 baseViewHolder = new ImageHolder(LayoutInflater.from(mContext)
-                        .inflate(R.layout.item_home, parent, false));
+                        .inflate(R.layout.all_image_item, parent, false));
                 break;
             case TYPE_TEXT :
                 baseViewHolder = new TextHolder(LayoutInflater.from(mContext)
@@ -145,7 +146,7 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
             case TYPE_IMAGE :
                 ImageHolder imageHolder = (ImageHolder) holder;
 
-                imageHolder.tv.setText("image");
+                imageHolder.setData(datas.get(position));
                 break;
             case TYPE_TEXT :
                 TextHolder textHolder = (TextHolder) holder;
@@ -278,10 +279,33 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
     }
 
     class ImageHolder extends BaseViewHolder{
-        TextView tv;
-        public ImageHolder(View itemView) {
-            super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.id_num);
+        TextView tvContext;
+        ImageView ivImageIcon;
+
+        public ImageHolder(View convertView) {
+            super(convertView);
+
+            //中间公共部分 -所有的都有
+            tvContext = (TextView) convertView.findViewById(R.id.tv_context);
+            ivImageIcon = (ImageView) convertView.findViewById(R.id.iv_image_icon);
+        }
+
+        public void setData(NetAudioBean.ListBean mediaItem) {
+            super.setData(mediaItem);
+
+            //设置文本-所有的都有
+            tvContext.setText(mediaItem.getText() + "_" + mediaItem.getType());
+            //图片特有的
+
+            ivImageIcon.setImageResource(R.drawable.bg_item);
+            if (mediaItem.getImage() != null && mediaItem.getImage() != null && mediaItem.getImage().getSmall() != null) {
+                Glide.with(mContext)
+                        .load(mediaItem.getImage().getDownload_url().get(0))
+                        .placeholder(R.drawable.bg_item)
+                        .error(R.drawable.bg_item)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(ivImageIcon);
+            }
         }
     }
 
@@ -291,6 +315,8 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
             super(itemView);
             tv = (TextView) itemView.findViewById(R.id.id_num);
         }
+
+
     }
 
     class GifHolder extends BaseViewHolder{
