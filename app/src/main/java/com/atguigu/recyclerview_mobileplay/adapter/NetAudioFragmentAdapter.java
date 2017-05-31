@@ -1,6 +1,7 @@
 package com.atguigu.recyclerview_mobileplay.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.recyclerview_mobileplay.R;
+import com.atguigu.recyclerview_mobileplay.activity.ShowImageAndGifActivity;
 import com.atguigu.recyclerview_mobileplay.domain.NetAudioBean;
 import com.atguigu.recyclerview_mobileplay.util.Utils;
 import com.bumptech.glide.Glide;
@@ -139,7 +141,7 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
      * 在这里设置不同的item的数据,或点击事件
      */
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
+    public void onBindViewHolder(BaseViewHolder holder, final int position) {
         int itemViewType = getItemViewType(position);
         switch (itemViewType) {
             case TYPE_VIDEO :
@@ -156,7 +158,15 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
                 imageHolder.ivImageIcon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(mContext, "点击image", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, "点击image", Toast.LENGTH_SHORT).show();
+                        NetAudioBean.ListBean listBean = datas.get(position);
+                        if(listBean != null) {
+                            //3.传递视频列表
+                            Intent intent = new Intent(mContext, ShowImageAndGifActivity.class);
+                            String url = listBean.getImage().getBig().get(0);
+                            intent.putExtra("url",url);
+                            mContext.startActivity(intent);
+                        }
                     }
                 });
                 break;
