@@ -2,6 +2,7 @@ package com.atguigu.recyclerview_mobileplay.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,38 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
 
     }
 
+
+    @Override
+    public int getItemCount() {
+        return datas.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        int itemViewType = -1;
+        NetAudioBean.ListBean listBean = datas.get(position);
+        //根据位置，从列表中得到一个数据对象
+        String type = listBean.getType();
+        if ("video".equals(type)) {
+            itemViewType = TYPE_VIDEO;
+        } else if ("image".equals(type)) {
+            itemViewType = TYPE_IMAGE;
+        } else if ("text".equals(type)) {
+            itemViewType = TYPE_TEXT;
+        } else if ("gif".equals(type)) {
+            itemViewType = TYPE_GIF;
+        } else {
+            itemViewType = TYPE_AD;//广播
+        }
+        return itemViewType;
+    }
+
+    /**
+     * 这里创建viewHolder的实例
+     * @param parent
+     * @param viewType 代表item的类型，当重写了getItemViewType方法后，viewType真是有效
+     * @return
+     */
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         BaseViewHolder baseViewHolder = null;
@@ -59,6 +92,7 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
             case TYPE_VIDEO :
                 baseViewHolder = new VideoHoder(LayoutInflater.from(mContext)
                         .inflate(R.layout.item_home, parent, false));
+                Log.e("TAG","onCreateViewHolder---TYPE_VIDEO");
                 break;
             case TYPE_IMAGE :
                 baseViewHolder = new ImageHolder(LayoutInflater.from(mContext)
@@ -112,30 +146,6 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
 
     }
 
-    @Override
-    public int getItemCount() {
-        return datas.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        int itemViewType = -1;
-        NetAudioBean.ListBean listBean = datas.get(position);
-        //根据位置，从列表中得到一个数据对象
-        String type = listBean.getType();
-        if ("video".equals(type)) {
-            itemViewType = TYPE_VIDEO;
-        } else if ("image".equals(type)) {
-            itemViewType = TYPE_IMAGE;
-        } else if ("text".equals(type)) {
-            itemViewType = TYPE_TEXT;
-        } else if ("gif".equals(type)) {
-            itemViewType = TYPE_GIF;
-        } else {
-            itemViewType = TYPE_AD;//广播
-        }
-        return itemViewType;
-    }
 
 
     class BaseViewHolder extends RecyclerView.ViewHolder{
