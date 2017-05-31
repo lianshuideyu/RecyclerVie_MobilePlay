@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         initData();
 
         rg_bottom.setOnCheckedChangeListener(this);
-        rg_bottom.check(R.id.rb_local_video);//初进页面默认勾选的项目
+        rg_bottom.check(R.id.rb_recyclerview);//初进页面默认勾选的项目
     }
 
     private void initData() {

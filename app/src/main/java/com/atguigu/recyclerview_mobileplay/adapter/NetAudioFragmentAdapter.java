@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.atguigu.recyclerview_mobileplay.R;
 import com.atguigu.recyclerview_mobileplay.domain.NetAudioBean;
@@ -151,6 +152,13 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
                 ImageHolder imageHolder = (ImageHolder) holder;
 
                 imageHolder.setData(datas.get(position));
+                //设置图片的点击事件
+                imageHolder.ivImageIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(mContext, "点击image", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             case TYPE_TEXT :
                 TextHolder textHolder = (TextHolder) holder;
@@ -161,6 +169,13 @@ public class NetAudioFragmentAdapter extends RecyclerView.Adapter<NetAudioFragme
                 GifHolder gifHolder = (GifHolder) holder;
 
                 gifHolder.setData(datas.get(position));
+                //设置图片的点击事件
+                gifHolder.ivImageGif.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(mContext, "点击gif", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             case TYPE_AD :
                 ADHolder adHolder = (ADHolder) holder;
